@@ -15,7 +15,7 @@ class CourseRepository
 
   public function getAll()
   {
-    return $this->entity->with('modules.lessons')->get();
+    return $this->entity->with('modules.lessons.views')->get();
   }
 
   public function getById(string $id)
