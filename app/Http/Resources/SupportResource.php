@@ -18,12 +18,13 @@ class SupportResource extends JsonResource
     return [
       'id'           => $this->id,
       'status'       => $this->status,
-      'status_label' => $this->statusOptions[$this->status],
+      'status_label' => $this->statusOptions[$this->status] ?? 'Not Found Status',
       'description'  => $this->description,
-      'updated_at'   => Carbon::make($this->updated_at)->format('Y-m-d H:i:s'),
       'user'         => new UserResource($this->user),
       'lesson'       => new LessonResource($this->whenLoaded('lessons')),
-      'replies'      => LessonResource::collection($this->whenLoaded('replies')),
+      //'replies'      => ReplySupportResource::collection($this->whenLoaded('replies')),
+      'replies'      => ReplySupportResource::collection($this->replies),
+      'updated_at'   => Carbon::make($this->updated_at)->format('Y-m-d H:i:s'),
     ];
   }
 }
